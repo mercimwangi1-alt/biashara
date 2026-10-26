@@ -1,6 +1,5 @@
-from django.shortcuts import render
-
-
+from django.shortcuts import get_object_or_404, redirect, render
+from myapp.models import contact
 
 
 # Create your views here.
@@ -10,8 +9,7 @@ def details(request):
     return render(request, 'blog-details.html')
 def blog(request):
     return render(request, 'blog.html')
-def index(request):
-    return render(request, 'index.html')
+
 def portfolio(request):
     return render(request, 'portfolio-details.html')
 def services(request):
@@ -40,4 +38,26 @@ def contact(request):
         })
 
     return render(request, "contact.html")
+def show(request):
+    all=Contact.objects.all()
+    return render(request, "show.html", {"all":all})
+
+def delete(request, id):
+    mycontact = Contact.objects.get(id=id)
+    mycontact.delete()
+    return redirect('show')
+def Edit(request, id):
+    editappointment =get_object_or_404(Contact, id=id)
+
+    if request.method == "POST":
+        editappointment.name = request.POST.get("name")
+        editappointment.email = request.POST.get("email")
+        editappointment.message = request.POST.get("message")
+
+        editappointment.save()
+        return redirect('/show')
+
+    else:
+      return render(request, "edit.html", {'editappointment': editappointment})
+
     

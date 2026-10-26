@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Contact Messages</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap.min.css' %}">
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+</head>
+<body background="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmFja2dyb3VuZCUyMGltYWdlc3xlbnwwfHwwfHx8&w=1000&q=80" style="background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+    <h1 >All Contact Messages</h1>
+    <p>Here are all the contact messages. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta ullam iste deleniti ut doloremque magni, 
+        <br>
+        facilis modi enim aspernatur dignissimos cumque consectetur deserunt. Eligendi nam tempora eveniet, magni culpa in.</p>
+    <table class="table table-striped table-bordered" style="background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);","table-layout: fixed; width: 100%; border-collapse: collapse;">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>action</th>
+        </tr>
+        {% for x in all %}
+        <tr>
+            <td>{{ x.name }}</td>
+            <td>{{ x.email }}</td>
+            <td>{{ x.subject }}</td>
+            <td>{{ x.message }}</td>
+
+            <td>
+                <a href="/delete/{{ x.id }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this contact message?');">Delete</a>
+                <a href="" class="btn btn-primary">Edit</a>
+            </td>
+        </tr>
+        {%endfor%}
+    
+    </table>
+</body>
+</html>
